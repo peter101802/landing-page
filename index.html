@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maison Margiela - BELT JACKET</title>
+    <!-- 폰트 로드: 우아하고 고급스러운 느낌을 주는 Playfair Display와 모던한 Inter 사용 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #F8F6F0;
+            /* 밝고 우아한 베이지색 */
+            --text-main: #1A1A1A;
+            /* 완전한 검정보다 부드러운 다크 그레이/블랙 */
+            --text-muted: #555555;
+            --font-sans: 'Inter', sans-serif;
+            --font-serif: 'Playfair Display', serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: var(--font-sans);
+            line-height: 1.6;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* 애니메이션 효과 */
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        .animate-fade-in-down {
+            animation: fadeInDown 1s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+        }
+
+        .animate-fade-in-up {
+            animation: fadeInUp 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+            opacity: 0;
+            /* 초기 상태를 투명하게 */
+        }
+
+        .animate-delay-1 {
+            animation-delay: 0.2s;
+        }
+
+        .animate-delay-2 {
+            animation-delay: 0.4s;
+        }
+
+        .animate-delay-3 {
+            animation-delay: 0.6s;
+        }
+
+        /* 네비게이션 바 */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 2.5rem 5%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 100;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-main);
+            font-weight: 500;
+            font-size: 0.85rem;
+            letter-spacing: 0.05em;
+            position: relative;
+            padding-bottom: 4px;
+            transition: color 0.3s ease;
+        }
+
+        /* 호버 시 밑줄 애니메이션 */
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 1px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--text-main);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .lang-switch {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .lang-switch a {
+            text-decoration: none;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            font-weight: 500;
+            letter-spacing: 0.05em;
+            transition: color 0.3s ease;
+        }
+
+        .lang-switch a.active {
+            color: var(--text-main);
+            font-weight: 600;
+        }
+
+        .lang-switch a:hover {
+            color: var(--text-main);
+        }
+
+        /* 헤더 (타이틀 영역) */
+        header {
+            padding-top: 12rem;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .brand-name {
+            font-family: var(--font-serif);
+            font-size: 4.5rem;
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.5rem;
+            color: var(--text-main);
+        }
+
+        .subtitle {
+            font-family: var(--font-sans);
+            font-size: 1.2rem;
+            font-weight: 500;
+            letter-spacing: 0.25em;
+            margin-bottom: 1rem;
+            color: var(--text-main);
+        }
+
+        .line-title {
+            font-family: var(--font-sans);
+            font-size: 0.9rem;
+            font-weight: 400;
+            letter-spacing: 0.6em;
+            color: var(--text-muted);
+            margin-bottom: 4rem;
+            margin-left: 0.6em;
+            /* 자간으로 인한 어색함 보정 */
+        }
+
+        /* 메인 제품 이미지 */
+        .hero-image-container {
+            width: 100%;
+            max-width: 900px;
+            margin: 0 auto 6rem;
+            position: relative;
+            display: flex;
+            justify-content: center;
+        }
+
+        .hero-image {
+            width: 100%;
+            max-width: 600px;
+            height: auto;
+            display: block;
+            /* 누끼 딴 이미지이므로 자연스러운 그림자 효과 추가 */
+            filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.15)) contrast(1.05);
+            transition: transform 0.7s cubic-bezier(0.2, 0.8, 0.2, 1);
+            object-fit: contain;
+        }
+
+        .hero-image:hover {
+            transform: scale(1.03);
+        }
+
+        /* 제품 설명 섹션 */
+        .product-description {
+            max-width: 1200px;
+            margin: 0 auto 8rem;
+            padding: 0 5%;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 4rem;
+        }
+
+        .desc-item {
+            text-align: left;
+            position: relative;
+        }
+
+        .desc-title {
+            font-family: var(--font-serif);
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            color: var(--text-main);
+            position: relative;
+            padding-bottom: 1rem;
+            font-style: italic;
+        }
+
+        .desc-title::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 40px;
+            height: 1px;
+            background-color: var(--text-main);
+        }
+
+        .desc-text {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            line-height: 1.8;
+            font-weight: 300;
+            word-break: keep-all;
+        }
+
+        /* 푸터 */
+        footer {
+            text-align: center;
+            padding: 4rem 2rem;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            border-top: 1px solid rgba(0, 0, 0, 0.05);
+            letter-spacing: 0.05em;
+        }
+
+        /* 반응형 디자인 */
+        @media (max-width: 1024px) {
+            .product-description {
+                gap: 2.5rem;
+            }
+
+            .brand-name {
+                font-size: 3.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .product-description {
+                grid-template-columns: 1fr;
+                gap: 3.5rem;
+                max-width: 600px;
+            }
+
+            .desc-item {
+                text-align: center;
+            }
+
+            .desc-title::after {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+
+            .brand-name {
+                font-size: 2.8rem;
+            }
+
+            header {
+                padding-top: 10rem;
+            }
+
+            .nav-links {
+                display: none;
+                /* 모바일에서는 일단 숨김 처리 (또는 햄버거 메뉴 적용 가능) */
+            }
+
+            /* 모바일 간소화 네비게이션 */
+            nav {
+                justify-content: center;
+                padding: 1.5rem 5%;
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .nav-links {
+                display: flex;
+                gap: 1.5rem;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .brand-name {
+                font-size: 2rem;
+                letter-spacing: 0.02em;
+            }
+
+            .subtitle {
+                font-size: 1rem;
+                letter-spacing: 0.15em;
+            }
+
+            .line-title {
+                font-size: 0.75rem;
+                letter-spacing: 0.4em;
+                margin-bottom: 2.5rem;
+            }
+
+            .nav-links {
+                gap: 1rem;
+            }
+
+            .nav-links a {
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- 상단 네비게이션 -->
+    <nav class="animate-fade-in-down">
+        <ul class="nav-links">
+            <li><a href="#">홈페이지</a></li>
+            <li><a href="#">제품</a></li>
+            <li><a href="#">스토리</a></li>
+            <li><a href="#">문의</a></li>
+        </ul>
+        <div class="lang-switch">
+            <a href="index.html" class="active">KR</a>
+            <a href="index_en.html">EN</a>
+        </div>
+    </nav>
+
+    <!-- 타이틀 영역 -->
+    <header>
+        <h1 class="brand-name animate-fade-in-up">Maison Margiela</h1>
+        <h2 class="subtitle animate-fade-in-up animate-delay-1">BELT JACKET</h2>
+        <h3 class="line-title animate-fade-in-up animate-delay-2">L I N E 0 : A R T I S A N A L</h3>
+    </header>
+
+    <main>
+        <!-- 메인 제품 이미지 -->
+        <div class="hero-image-container animate-fade-in-up animate-delay-3">
+            <img src="../assets/product_nobg.png" alt="Maison Margiela Belt Jacket" class="hero-image">
+        </div>
+
+        <!-- 제품 설명 -->
+        <section class="product-description">
+            <div class="desc-item animate-fade-in-up animate-delay-1">
+                <h4 class="desc-title">Multidimensional Texture</h4>
+                <p class="desc-text">빈티지 벨트마다 다른 가죽의 색감(espresso, ochre 등)이 이루는 리듬감을 표현했습니다. 각각의 피스가 지닌 고유의 텍스처가 하나의
+                    작품으로 완벽한 조화를 이룹니다.</p>
+            </div>
+
+            <div class="desc-item animate-fade-in-up animate-delay-2">
+                <h4 class="desc-title">Deconstructed Utility</h4>
+                <p class="desc-text">벨트 버클이 단순 장식이 아니라, 실루엣을 조절할 수 있는 '기능적 요소'이자 마르지엘라 특유의 '아방가르드한 선언'임을 강조했습니다.</p>
+            </div>
+
+            <div class="desc-item animate-fade-in-up animate-delay-3">
+                <h4 class="desc-title">The Artisanal Philosophy</h4>
+                <p class="desc-text">마르지엘라의 핵심 가치인 '업사이클링(Upcycling)'과 일상적인 물건을 하이패션으로 승화시키는 브랜드의 해체주의적 철학을 오롯이 담아냈습니다.
+                </p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p class="animate-fade-in-up">&copy; 2026 Maison Margiela. All Rights Reserved.</p>
+    </footer>
+
+</body>
+
+</html>
